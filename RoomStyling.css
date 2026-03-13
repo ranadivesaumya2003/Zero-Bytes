@@ -1,0 +1,534 @@
+/* ============================================
+   LOBBY ROOM - 3D IMMERSIVE DESIGN
+   ============================================ */
+
+.lobby-room-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a2847 0%, #0f172a 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.lobby-top-bar {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+}
+
+.lobby-top-bar h1 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.8rem;
+}
+
+.lobby-top-bar p {
+  color: var(--text-secondary);
+  margin: 5px 0 0 0;
+}
+
+/* 3D ROOM SETUP */
+.room-3d {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.room-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.wall-back {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, #1a2847, #0f172a);
+  box-shadow: inset 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.wall-left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 25%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent);
+}
+
+.wall-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 25%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
+}
+
+.floor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
+  background: linear-gradient(to bottom, rgba(50, 50, 50, 0.2), rgba(0, 0, 0, 0.5));
+  box-shadow: inset 0 -50px 100px rgba(0, 0, 0, 0.8);
+}
+
+/* DESK CONTAINER */
+.desk-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1000px;
+  height: 500px;
+  perspective: 1500px;
+}
+
+.desk {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #4a4a4a 0%, #2a2a2a 100%);
+  border-radius: 8px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  transform: rotateX(5deg);
+}
+
+/* DESK LEGS */
+.desk-leg {
+  position: absolute;
+  bottom: -80px;
+  width: 60px;
+  height: 80px;
+  background: linear-gradient(to right, #2a2a2a, #1a1a1a);
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.desk-leg-1 {
+  left: 10%;
+}
+
+.desk-leg-2 {
+  right: 10%;
+}
+
+/* LAMP */
+.lamp {
+  position: relative;
+  width: 80px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 300ms;
+}
+
+.lamp-base {
+  width: 60px;
+  height: 15px;
+  background: linear-gradient(to bottom, #FFD700, #FFA500);
+  border-radius: 3px;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+}
+
+.lamp-pole {
+  width: 8px;
+  height: 80px;
+  background: linear-gradient(to right, #FFD700, #FFA500);
+  margin: 5px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.lamp-shade {
+  width: 50px;
+  height: 35px;
+  background: linear-gradient(to bottom, #FFA500, #FF8C00);
+  border-radius: 50% 50% 40% 40%;
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+  transition: all 300ms;
+}
+
+.lamp.on .lamp-shade {
+  box-shadow: 0 4px 25px rgba(255, 215, 0, 0.6);
+  background: linear-gradient(to bottom, #FFD700, #FFA500);
+}
+
+.lamp-light {
+  position: absolute;
+  top: -20px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.4), transparent);
+  border-radius: 50%;
+  animation: lampGlow 2s ease-in-out infinite;
+}
+
+@keyframes lampGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* DESKTOP COMPUTER */
+.desktop-computer {
+  position: relative;
+  width: 400px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.monitor-stand {
+  position: absolute;
+  bottom: -10px;
+  width: 120px;
+  height: 15px;
+  background: linear-gradient(to bottom, #333, #222);
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* MONITOR */
+.monitor {
+  width: 100%;
+  height: 220px;
+  background: #000;
+  border: 12px solid #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.9),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.monitor-bezel {
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* SCREEN CONTENT */
+.monitor-screen {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a2847 0%, #0f172a 100%);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.screen-header {
+  text-align: center;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.screen-header h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.screen-header p {
+  margin: 2px 0 0 0;
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+}
+
+/* EXERCISES GRID ON SCREEN */
+.screen-exercises-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.screen-exercise-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 200ms;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.65rem;
+  color: var(--text-primary);
+  min-height: 45px;
+}
+
+.screen-exercise-card:hover {
+  background: var(--bg-hover);
+  border-color: var(--primary);
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+}
+
+.screen-exercise-card.selected {
+  border-color: var(--primary);
+  background: rgba(0, 217, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+}
+
+.exercise-icon {
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+}
+
+.exercise-name {
+  font-weight: 600;
+  font-size: 0.6rem;
+}
+
+/* MONITOR BUTTONS */
+.monitor-buttons {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: flex;
+  gap: 4px;
+}
+
+.monitor-button {
+  width: 24px;
+  height: 24px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 200ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.monitor-button:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--bg-dark);
+}
+
+/* KEYBOARD */
+.keyboard {
+  position: absolute;
+  bottom: -35px;
+  width: 300px;
+  height: 30px;
+  background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+  border-radius: 4px;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.keyboard-key {
+  flex: 1;
+  background: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
+  border-radius: 2px;
+  border: 1px solid #1a1a1a;
+}
+
+/* MOUSE */
+.mouse {
+  position: absolute;
+  bottom: -40px;
+  right: 20px;
+  width: 35px;
+  height: 50px;
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border-radius: 50% 50% 40% 40%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* PLANT DECORATION */
+.plant {
+  position: relative;
+  width: 80px;
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.pot {
+  width: 50px;
+  height: 40px;
+  background: linear-gradient(135deg, #A0522D, #8B4513);
+  border-radius: 0 0 10px 10px;
+  border: 2px solid #654321;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.leaf {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  background: linear-gradient(to right, #228833, #33AA44);
+  border-radius: 50% 50% 50% 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.leaf-1 {
+  bottom: 30px;
+  left: 10px;
+  transform: rotate(-30deg);
+  animation: sway 4s ease-in-out infinite;
+}
+
+.leaf-2 {
+  bottom: 35px;
+  left: 25px;
+  transform: rotate(0deg);
+  animation: sway 5s ease-in-out infinite 0.5s;
+}
+
+.leaf-3 {
+  bottom: 25px;
+  right: 15px;
+  transform: rotate(30deg);
+  animation: sway 4.5s ease-in-out infinite 1s;
+}
+
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(var(--rotation, 0deg));
+  }
+  50% {
+    transform: rotate(calc(var(--rotation, 0deg) + 5deg));
+  }
+}
+
+/* FLOATING PARTICLES */
+.particles {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(0, 217, 255, 0.3);
+  border-radius: 50%;
+  animation: float 6s infinite ease-in-out;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-300px) translateX(50px);
+    opacity: 0;
+  }
+}
+
+/* HINT TEXT */
+.lobby-hint {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 217, 255, 0.1);
+  color: var(--text-secondary);
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 217, 255, 0.3);
+  font-size: 0.85rem;
+  z-index: 30;
+  text-align: center;
+  animation: slideUp 500ms ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .desk {
+    flex-direction: column;
+    height: auto;
+    gap: 20px;
+  }
+
+  .desktop-computer {
+    width: 250px;
+  }
+
+  .screen-exercises-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lobby-hint {
+    font-size: 0.75rem;
+    padding: 10px 15px;
+  }
+}
+
+/* ERROR STYLING IN OUTPUT */
+.output-error {
+  color: #ef4444;
+  font-family: 'Courier New', monospace;
+}
+
+.output-error pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
